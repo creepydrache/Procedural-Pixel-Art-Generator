@@ -26,7 +26,7 @@ It works best with small simple sprites, without shading or texture (which it's 
     <div class="gridline vertical"></div>
 
     <div id="layer-selected">
-      <strong>Layers:</strong> 
+      <strong>Layers:</strong>
         <input type="radio" id="option-one" name="layer-selected" value="1" autocomplete="off"/><label for="option-one">Top</label>
         <input type="radio" id="option-two" name="layer-selected" value="2" autocomplete="off" checked/><label for="option-two">Middle</label>
         <input type="radio" id="option-three" name="layer-selected" value="3" autocomplete="off"/><label for="option-three">Bottom</label>
@@ -35,57 +35,57 @@ It works best with small simple sprites, without shading or texture (which it's 
     </div>
 
   </div>
-  
+
   <div>
-    
+
     <h3>Palette</h3>
     <div class="color-selection">
-      
+
       <div class="color">
-        <button class="palette-color current-color"></button> 
-        <strong>=</strong> 
+        <button class="palette-color current-color"></button>
+        <strong>=</strong>
         <button class="jscolor {valueElement:null,value:'d24040',borderWidth:0,insetColor:'transparent'}"></button>
       </div>
-      
+
       <div class="color">
-        <button class="palette-color"></button> 
-        <strong>=</strong> 
+        <button class="palette-color"></button>
+        <strong>=</strong>
         <button class="jscolor {valueElement:null,value:'10c840',borderWidth:0,insetColor:'transparent'}"></button>
       </div>
-      
+
       <div class="color">
-        <button class="palette-color"></button> 
-        <strong>=</strong> 
+        <button class="palette-color"></button>
+        <strong>=</strong>
         <button class="jscolor {valueElement:null,value:'00a0c8',borderWidth:0,insetColor:'transparent'}"></button>
       </div>
-      
+
       <div class="color">
-        <button class="palette-color"></button> 
-        <strong>=</strong> 
+        <button class="palette-color"></button>
+        <strong>=</strong>
         <button class="jscolor {valueElement:null,value:'736464',borderWidth:0,insetColor:'transparent'}"></button>
       </div>
-      
+
       <div class="color">
-        <button class="palette-color"></button> 
-        <strong>=</strong> 
+        <button class="palette-color"></button>
+        <strong>=</strong>
         <button class="jscolor {valueElement:null,value:'a0694b',borderWidth:0,insetColor:'transparent'}"></button>
       </div>
-      
+
       <div class="color">
-        <button class="palette-color"></button> 
-        <strong>=</strong> 
+        <button class="palette-color"></button>
+        <strong>=</strong>
         <button class="jscolor {valueElement:null,value:'fac800',borderWidth:0,insetColor:'transparent'}"></button>
       </div>
-      
+
       <div class="color">
-        <button class="palette-color"></button> 
-        <strong>=</strong> 
+        <button class="palette-color"></button>
+        <strong>=</strong>
         <button class="jscolor {valueElement:null,value:'101820',borderWidth:0,insetColor:'transparent'}"></button>
       </div>
-      
+
       <div class="selection"></div>
     </div>
-    
+
     <h3>Chance to generate</h3>
     <div class="chance-selection">
       <button data-alpha="0.25">25%</button>
@@ -93,17 +93,17 @@ It works best with small simple sprites, without shading or texture (which it's 
       <button data-alpha="0.75">75%</button>
       <button data-alpha="1" class="current-selection">100%</button>
     </div>
-    
+
     <button class="eraser" title="eraser">{{svg "eraser"}}</button>
   </div>
-  
+
   <div>
     <h3>Drawing Settings</h3>
 
     {{checkbox "mirror-drawing-x" label="Mirror Horizontally" default="true"}}
     {{checkbox "mirror-drawing-y" label="Mirror Vertically" default="false"}}
-    
-    
+
+
     <h3>Templates</h3>
     <button class="link-button import">Import</button>
     <button class="link-button export">Export</button>

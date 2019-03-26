@@ -18,17 +18,19 @@ Suggestions / Planned features:
 
 ## How to Contribute
 
-1. Click **Fork** above. It will automatically create a copy of this repository and add it to your account. 
-2. Clone the repository to your computer. 
-3. Make any changes you would like to suggest.
-4. Add, Commit and Push your changes to your fork.
-5. On this page, click **New Pull Request** above the file list.
-6. Change the **head repository** dropdown to your fork.
-7. Add a title and description explaining your changes.
-8. Click create pull request.
+1. Click **Fork** above. It will automatically create a copy of this repository and add it to your account.
+2. Clone the repository to your computer.
+3. Open the folder in command prompt and run **npm install**
+4. Make any changes you would like to suggest.
+5. In command prompt run **node build.js** which will compile it to the */build* folder, where you can make sure it works
+6. Add, Commit and Push your changes to your fork.
+7. On this page, click **New Pull Request** above the file list.
+8. Change the **head repository** dropdown to your fork.
+9. Add a title and description explaining your changes.
+10. Click create pull request.
 
 If you have any trouble, see this page: https://help.github.com/en/articles/creating-a-pull-request-from-a-fork
 
-## Licence 
+## License
 
 This software may not be resold, redistributed, rehosted or otherwise conveyed to a third party.
