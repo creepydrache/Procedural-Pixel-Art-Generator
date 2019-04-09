@@ -1,0 +1,27 @@
+
+  
+{{#if multiline}}
+<div class="textarea-holder">
+  <label for="text-{{fieldslug}}">{{label}}</label>
+  <textarea 
+    id="text-{{fieldslug}}"
+    class="textbox autosize"
+    type="text" 
+    name="{{name}}" 
+    spellcheck="false"
+    >{{default}}</textarea>
+   
+</div>
+{{else}}
+<div class="textbox-holder">
+  <input 
+    id="text-{{fieldslug}}"
+    class="textbox"
+    type="text" 
+    name="{{name}}" 
+    spellcheck="false"
+    value="{{default}}"
+    /> 
+  <label for="text-{{fieldslug}}">{{label}}</label>
+</div>
+{{/if}}

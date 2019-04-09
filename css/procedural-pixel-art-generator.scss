@@ -1,7 +1,5 @@
 @import 'colors';
 @import 'utilities/no-filtering';
-@import 'utilities/formcheck';
-@import 'utilities/formtext';
 @import 'utilities/no-select';
 
 #examples {
@@ -169,13 +167,8 @@ canvas {
   }
 }
 
-.checkbox-holder {
-  @include formcheck();
-}
+.textbox-holder {
 
-.text-holder {
-  @include formtext();
-  
   input {
     width: 2em;
     text-align: center;

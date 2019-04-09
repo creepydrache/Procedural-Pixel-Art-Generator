@@ -96,14 +96,14 @@ exportButton.addEventListener('click', function () {
       customColors[5].jscolor.toHEXString(),
       customColors[6].jscolor.toHEXString(),
     ],
-    mirrorDrawingX: mirrorDrawingX.checked,
-    mirrorDrawingY: mirrorDrawingY.checked,
-    centerPixel: centerPixel.checked,
-    mirrorGenerationX: mirrorGenerationX.checked,
-    mirrorGenerationY: mirrorGenerationY.checked,
+    mirrorDrawingX: mirrorDrawingX.getValue(),
+    mirrorDrawingY: mirrorDrawingY.getValue(),
+    centerPixel: centerPixel.getValue(),
+    mirrorGenerationX: mirrorGenerationX.getValue(),
+    mirrorGenerationY: mirrorGenerationY.getValue(),
     variations: variations.value,
-    drawOutline: drawOutline.checked,
-    removeSinglePixels: removeSinglePixels.checked,
+    drawOutline: drawOutline.getValue(),
+    removeSinglePixels: removeSinglePixels.getValue(),
   };
 
   exportHolder.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(settingsObject)));
@@ -171,14 +171,14 @@ function loadPreset (settingsObject) {
   customColors[6].jscolor.fromString(settingsObject.palette[6]),
   
   //settings
-  mirrorDrawingX.checked = settingsObject.mirrorDrawingX;
-  mirrorDrawingY.checked = settingsObject.mirrorDrawingY;
-  centerPixel.checked = settingsObject.centerPixel;
-  mirrorGenerationX.checked = settingsObject.mirrorGenerationX;
-  mirrorGenerationY.checked = settingsObject.mirrorGenerationY;
+  mirrorDrawingX.setValue(settingsObject.mirrorDrawingX);
+  mirrorDrawingY.setValue(settingsObject.mirrorDrawingY);
+  centerPixel.setValue(settingsObject.centerPixel);
+  mirrorGenerationX.setValue(settingsObject.mirrorGenerationX);
+  mirrorGenerationY.setValue(settingsObject.mirrorGenerationY);
   variations.value = settingsObject.variations;
-  drawOutline.checked = settingsObject.drawOutline;
-  removeSinglePixels.checked = settingsObject.removeSinglePixels;
+  drawOutline.setValue(settingsObject.drawOutline);
+  removeSinglePixels.setValue(settingsObject.removeSinglePixels);
 
 }  
 
@@ -206,7 +206,7 @@ function changeSelectedLayer () {
 //toggle onion skin
 document.querySelector('#checkbox-onion-skin').addEventListener('change', function () {
   
-  if (this.checked)
+  if (this.getValue())
     document.querySelector('.canvas-holder').classList.add('onion');
   else
     document.querySelector('.canvas-holder').classList.remove('onion');
@@ -312,10 +312,10 @@ function line(x0,y0,x1,y1) {
 		selectedCtx.clearRect(x0, y0, 1, 1);
 		selectedCtx.fillRect(x0, y0, 1, 1);
 		
-		var cp = centerPixel.checked ? 1 : 0;
+		var cp = centerPixel.getValue() ? 1 : 0;
 		
 		//if horizontal mirroring is enabled
-		if (mirrorDrawingX.checked) {
+		if (mirrorDrawingX.getValue()) {
 		  console.log(width,x0,cp,width-x0-cp)
 		  //clear pixel then set pixel color
 		  selectedCtx.clearRect(width-1-x0-cp, y0, 1, 1);
@@ -323,14 +323,14 @@ function line(x0,y0,x1,y1) {
 		}
 		
 		//if vertical mirroring is enabled
-		if (mirrorDrawingY.checked) {
+		if (mirrorDrawingY.getValue()) {
 		  //clear pixel then set pixel color
 		  selectedCtx.clearRect(x0, height-1-y0-cp, 1, 1);
 		  selectedCtx.fillRect(x0, height-1-y0-cp, 1, 1);
 		}
 		
 		//if vertical mirroring is enabled
-		if (mirrorDrawingX.checked && mirrorDrawingY.checked) {
+		if (mirrorDrawingX.getValue() && mirrorDrawingY.getValue()) {
 		  //clear pixel then set pixel color
 		  selectedCtx.clearRect(width-1-x0-cp, height-1-y0-cp, 1, 1);
 		  selectedCtx.fillRect(width-1-x0-cp, height-1-y0-cp, 1, 1);
@@ -435,7 +435,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
   
   output.innerHTML = '';
   
-  var cp = centerPixel.checked ? 1 : 0;
+  var cp = centerPixel.getValue() ? 1 : 0;
   
   //create a new sprite as many times as the variations value
   for (var v = 0; v < variations.value; v++) {
@@ -471,8 +471,8 @@ document.querySelector('button.generate').addEventListener('click', function () 
       for (let p = 0; p < outputImageData.length; p += 4) {
         
         //skip rendering for mirrored areas
-        if (mirrorGenerationX.checked && p/4 % width > width/2 - 1) continue;
-        if (mirrorGenerationY.checked && Math.floor(p/4 / width) > height/2 - 1) continue;
+        if (mirrorGenerationX.getValue() && p/4 % width > width/2 - 1) continue;
+        if (mirrorGenerationY.getValue() && Math.floor(p/4 / width) > height/2 - 1) continue;
         
         //set variables
         var thisPixel = [canvas.data[p + 0],canvas.data[p + 1],canvas.data[p + 2]];
@@ -513,7 +513,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
           }
           
           //mirror horizontally
-          if (mirrorGenerationX.checked) {
+          if (mirrorGenerationX.getValue()) {
             
             //find mirror X pixel
             if (p < 500) console.log('xpixel','x:',x,', flipX:',x+(width/2-x)*2)
@@ -534,7 +534,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
           }
           
           //mirror vertically
-          if (mirrorGenerationY.checked) {
+          if (mirrorGenerationY.getValue()) {
 
             //if it's not empty
             if (canvas.data[pY+3] != 0) {
@@ -552,7 +552,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
           }
           
           //mirror vertically and horizontally
-          if (mirrorGenerationX.checked && mirrorGenerationY.checked) {
+          if (mirrorGenerationX.getValue() && mirrorGenerationY.getValue()) {
 
             //if it's not empty
             if (canvas.data[pXY+3] != 0) {
@@ -588,7 +588,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
     outputContext.putImageData(outputImage, 1, 1);
 		
   //Mirror Horizontally
-  	if (mirrorGenerationX.checked) {
+  	if (mirrorGenerationX.getValue()) {
 
   	  //erase right half of image
   	  //outputContext.clearRect(width/2+1,0,width/2+1,height+2);
@@ -602,7 +602,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
 		}
 		
 	//remove single pixels
-  	if (removeSinglePixels.checked) {
+  	if (removeSinglePixels.getValue()) {
   	  //get sprite data
       var outputSprite = outputContext.getImageData(0,0,width+2,height+2);
       var outputData = outputSprite.data;
@@ -641,7 +641,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
 		
 	//DRAW OUTLINE ===============================================================
 	  
-  	 if (drawOutline.checked) {
+  	 if (drawOutline.getValue()) {
       var outputData = outputContext.getImageData(0,0,width+2,height+2).data;
       //let outlinedSprite = new ImageData(shapeData, width+2);
       let outlinedSprite = outputData.slice(0);

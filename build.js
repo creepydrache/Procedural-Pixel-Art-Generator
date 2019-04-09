@@ -14,6 +14,7 @@ console.log('Building Procedural Pixel Art Generator');
 
 hbs.registerHelper('svg', require('handlebars-helper-svg'));
 require('hbs-register-helpers')(hbs,'./_ext/modules/hbs/helpers/**/*.js');
+require('hbs-register-helpers')(hbs,'./_ext/modules/frontend/form/**/*.js',{ignore: './_ext/modules/frontend/form/**/_*.js'});
 require('hbs-register-partials')(hbs,'./_ext/modules/hbs/_*.hbs');
 
 //empty the build folder, or create it

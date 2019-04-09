@@ -1,0 +1,18 @@
+<div class="checkbox-holder">
+
+  
+  <div class="checkbox{{#if checked}} checked{{/if}}" id="checkbox-{{fieldslug}}">
+    <input type="hidden"
+      name="{{field}}"
+      value="{{#if checked}}1{{else}}0{{/if}}"
+      />
+      
+    <div class="box">{{svg "check"}}</div>
+  
+    <label>
+      {{label}}
+    </label> 
+  </div>
+
+
+</div>

@@ -1,22 +1,18 @@
 //(to use: @include formcheck();)
 
-@mixin formcheck() {
-  display: flex;
+.checkbox-holder {
+
   margin: 1em 0;
   @extend %noselect;
   
+
+
   
-  input[type="checkbox"] {
-    display: none;
-    
-    &:checked+label .box svg {
-      visibility: visible;
-    }
-  }
   
-  label {
-    display: flex;
+  .checkbox {
+    display: inline-block;
     cursor: pointer;
+    padding-right: 1em;
     
     .box {
       color: color(base, foreground, text);
@@ -28,6 +24,8 @@
       margin-right: 0.5rem;
       display: inline-block;
       vertical-align: middle;
+      border: solid 2px color(base);
+      pointer-events: none;
       
       svg {
         visibility: hidden;
@@ -37,11 +35,22 @@
         path { fill: color(base, foreground) }
       }
     }
-  }
-  
-  div.text {
-    display: flex; 
-    justify-content: center;
-    flex-direction: column;
+    
+    //checked
+    &.checked .box svg {
+      visibility: visible;
+    }
+    
+    label {
+      display: inline-block;
+      pointer-events: none;
+    }
+
+    //hover label or box
+    &:hover {
+      .box {
+        border-color: color(indent,background,outline);
+      }
+    }
   }
 }
