@@ -58,7 +58,7 @@ var page = pageTemplate({
   title: 'Lospec Procedural Pixel Art Generator',
   body: content,
   css: ['https://lospec.com/stylesheets/style.css','procedural-pixel-art-generator/procedural-pixel-art-generator.css'],
-  js: ['procedural-pixel-art-generator/procedural-pixel-art-generator.js'],
+  js: ['procedural-pixel-art-generator/procedural-pixel-art-generator.js','https://lospec.com/javascripts/scripts.js'],
 });
 
 //save output
