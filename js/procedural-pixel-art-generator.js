@@ -1,4 +1,4 @@
-//=include libraries/jscolor.js 
+//=include libraries/jscolor.js
 
 var examples = {
   sword: {"layers":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAXUlEQVRIie2PSwrAIBBD52hztNw8XfSD0XZVtRbyQIYQmDdGGGOMMcasC5nHRPPKfoAY17wXo6csz4VkpFYPeT9GurdHQLOK+/5YF1eiRqx5GLV4GhZP8zLwifi3bB8lRgc/vMVJAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAdklEQVRIie3VMQ6AIBBE0X+0PRo342hjIQ2aqIm4kwjTUFA8drMArDyMoDjUEFRQZMNVIFDNhtVgZaKlh1UycUvFcag4MnFDxQv+PzzfVNteLlur54HFNXC3P+YQbaCU+SXuYHTrymextdo2XJB0fU6os+KX2QCxLpL3243HNgAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAMElEQVRIie3OwQ0AIAwDsY7G/kuFFfhAi2RLeV+qAACYIcnxnpxpISx8LZqsvviPNr8QPgOTsW6cAAAAAElFTkSuQmCC"],"palette":["#ECF0D3","#9F9CAE","#5C5980","#734C3D","#A0694B","#FAC800","#101820"],"mirrorDrawingX":false,"mirrorDrawingY":false,"centerPixel":true,"mirrorGenerationX":true,"mirrorGenerationY":false,"variations":"6","drawOutline":true,"removeSinglePixels":true},
@@ -78,9 +78,9 @@ eraserButton.addEventListener('click', function () {
 });
 
 exportButton.addEventListener('click', function () {
-  
+
   var customColors = document.querySelectorAll(".color-selection .color .jscolor");
-  
+
   var settingsObject = {
     layers: [
       canvases[0].toDataURL('image/png'),
@@ -108,7 +108,7 @@ exportButton.addEventListener('click', function () {
 
   exportHolder.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(settingsObject)));
   exportHolder.click();
-  
+
   console.log(JSON.stringify(settingsObject));
 });
 
@@ -119,7 +119,7 @@ importButton.addEventListener('click', function () {
 importHolder.addEventListener('change', function () {
   //if file was chosen correctly
 	if (this.files && this.files[0] && this.files[0].type == 'application/json') {
-	  
+
 	  //load file
 	  var fileReader = new FileReader();
 	  fileReader.onload = function(e) {
@@ -129,37 +129,37 @@ importHolder.addEventListener('change', function () {
 	  fileReader.onerror = alert;
 	  fileReader.readAsText(this.files[0]);
 	}
-	
-	else 
+
+	else
 	  alert('There was an problem loading your settings.')
 });
-  
+
 function loadPreset (settingsObject) {
-        
+
   //reset generated sprites
   output.innerHTML = '';
-  
+
   //layers
   canvases[0].getContext('2d').clearRect(0,0,width,height);
   var layer1 = new Image;
   layer1.onload = function(){ canvases[0].getContext('2d').drawImage(layer1,0,0); };
   layer1.src = settingsObject.layers[0];
-  
+
   canvases[1].getContext('2d').clearRect(0,0,width,height);
   var layer2 = new Image;
   layer2.onload = function(){ canvases[1].getContext('2d').drawImage(layer2,0,0); };
   layer2.src = settingsObject.layers[1];
-  
+
   canvases[2].getContext('2d').clearRect(0,0,width,height);
   var layer3 = new Image;
   layer3.onload = function(){ canvases[2].getContext('2d').drawImage(layer3,0,0); };
   layer3.src = settingsObject.layers[2];
-  
+
   console.log(layer1)
   //canvases[0].toDataURL('image/png');
   //canvases[1].toDataURL('image/png');
   //canvases[2].toDataURL('image/png');
-  
+
   //colors
   var customColors = document.querySelectorAll(".color-selection .color .jscolor");
   customColors[0].jscolor.fromString(settingsObject.palette[0]),
@@ -169,7 +169,7 @@ function loadPreset (settingsObject) {
   customColors[4].jscolor.fromString(settingsObject.palette[4]),
   customColors[5].jscolor.fromString(settingsObject.palette[5]),
   customColors[6].jscolor.fromString(settingsObject.palette[6]),
-  
+
   //settings
   mirrorDrawingX.setValue(settingsObject.mirrorDrawingX);
   mirrorDrawingY.setValue(settingsObject.mirrorDrawingY);
@@ -180,7 +180,7 @@ function loadPreset (settingsObject) {
   drawOutline.setValue(settingsObject.drawOutline);
   removeSinglePixels.setValue(settingsObject.removeSinglePixels);
 
-}  
+}
 
 var selectedLayer, selectedCtx;
 changeSelectedLayer();
@@ -188,40 +188,40 @@ changeSelectedLayer();
 document.querySelector('#layer-selected').addEventListener('change', changeSelectedLayer);
 
 function changeSelectedLayer () {
-  
+
   var layerIndex = document.querySelector('#layer-selected input:checked').value;
   var fillStyle = selectedCtx ? selectedCtx.fillStyle : 'black';
   selectedLayer = canvases[layerIndex-1];
   selectedCtx = selectedLayer.getContext("2d");
   selectedCtx.fillStyle = fillStyle;
-  
-  
+
+
   //remove selection from canvas
   document.querySelector('.canvas-holder canvas.selected').classList.remove('selected');
   selectedLayer.classList.add('selected');
-  
+
   console.log('new layer selected',layerIndex);
 }
 
 //toggle onion skin
-document.querySelector('#checkbox-onion-skin').addEventListener('change', function () {
-  
+document.querySelector('#checkbox-onion-skin').addEventListener('click', function () {
+	console.log('toggled onion skin')
   if (this.getValue())
     document.querySelector('.canvas-holder').classList.add('onion');
   else
     document.querySelector('.canvas-holder').classList.remove('onion');
 });
-  
+
 window.addEventListener("resize", resizeCanvas);
 function resizeCanvas () {
-  
+
   //calculate zoom
   var canvasContainerWidth = demoContainer.offsetWidth - parseFloat(getComputedStyle(canvasContainer).paddingLeft)*2;
   zoom = Math.floor(canvasContainerWidth / width);
-  
+
   //max zoom level
   zoom = Math.min(zoom, 18);
-  
+
   //make sure the height doesnt take up the whole screen
   if (zoom * height > window.innerHeight * 0.5)
     zoom = Math.floor(window.innerHeight * 0.5 / height);
@@ -245,31 +245,31 @@ selectedCtx.fillStyle = color(colors[0]);
 //setup color buttons
 
 for (var i = 0; i < colorButtons.length; i++) {
-  
+
   var button = colorButtons[i];
-  
+
   if (!button) {
     console.error('there is no colorButton',i+1);
     continue;
   }
-  
+
 
   //button.style.backgroundColor = color(colors[i]);
   //button.style.opacity = colors[i][3] / 255;
   button.dataset.color = colors[i].toString();
-  
+
   button.addEventListener('click', function (colorClicked) {
-    
+
     console.log('clicked color',colorClicked);
-    
+
     //deselect eraser
     document.querySelector('#pixel-demo').classList.remove('eraser');
-    
+
     //remove current color
     var currentColor = document.querySelector('.color-selection .color .palette-color.current-color');
     if (currentColor)
       currentColor.classList.remove('current-color');
-    
+
     //save current color
     this.classList.add('current-color');
     var id = Array.from(colorClicked.target.parentNode.parentNode.children).indexOf(colorClicked.target.parentNode);
@@ -286,11 +286,11 @@ for (var i = 0; i < colorButtons.length; i++) {
 var chanceButtons = document.querySelectorAll(".chance-selection");
 for (var i = 0; i < chanceButtons.length; i++) {
   var button = chanceButtons[i];
-  
+
   button.addEventListener('click', function (chanceClicked) {
     document.querySelector('.chance-selection .current-selection').classList.remove('current-selection');
     chanceClicked.target.classList.add('current-selection');
-    
+
     //set new color
     var color = document.querySelector('.color-selection .color .palette-color.current-color').dataset.color;
     var alpha = chanceClicked.target.dataset.alpha;
@@ -300,7 +300,7 @@ for (var i = 0; i < chanceButtons.length; i++) {
 
 //draw a line between two points on canvas
 function line(x0,y0,x1,y1) {
-	
+
 	var dx = Math.abs(x1-x0);
 	var dy = Math.abs(y1-y0);
 	var sx = (x0 < x1 ? 1 : -1);
@@ -311,9 +311,9 @@ function line(x0,y0,x1,y1) {
 	  //clear pixel then set pixel color
 		selectedCtx.clearRect(x0, y0, 1, 1);
 		selectedCtx.fillRect(x0, y0, 1, 1);
-		
+
 		var cp = centerPixel.getValue() ? 1 : 0;
-		
+
 		//if horizontal mirroring is enabled
 		if (mirrorDrawingX.getValue()) {
 		  console.log(width,x0,cp,width-x0-cp)
@@ -321,21 +321,21 @@ function line(x0,y0,x1,y1) {
 		  selectedCtx.clearRect(width-1-x0-cp, y0, 1, 1);
 		  selectedCtx.fillRect(width-1-x0-cp, y0, 1, 1);
 		}
-		
+
 		//if vertical mirroring is enabled
 		if (mirrorDrawingY.getValue()) {
 		  //clear pixel then set pixel color
 		  selectedCtx.clearRect(x0, height-1-y0-cp, 1, 1);
 		  selectedCtx.fillRect(x0, height-1-y0-cp, 1, 1);
 		}
-		
+
 		//if vertical mirroring is enabled
 		if (mirrorDrawingX.getValue() && mirrorDrawingY.getValue()) {
 		  //clear pixel then set pixel color
 		  selectedCtx.clearRect(width-1-x0-cp, height-1-y0-cp, 1, 1);
 		  selectedCtx.fillRect(width-1-x0-cp, height-1-y0-cp, 1, 1);
 		}
-		
+
 		//if we've reached the end goal, exit the loop
 		if ((x0==x1) && (y0==y1)) break;
 		var e2 = 2*err;
@@ -351,7 +351,7 @@ function getCursorPosition(inputEvent) {
 	var y;
 	var canvasX = canvasHolder.getBoundingClientRect().left;
 	var canvasY = canvasHolder.getBoundingClientRect().top + document.documentElement.scrollTop;
-	
+
 	if (inputEvent.touches) { //mobile
 	  x = inputEvent.touches[0].clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
 	  y = inputEvent.touches[0].clientY + document.body.scrollTop + document.documentElement.scrollTop;
@@ -375,10 +375,10 @@ function mousedown (mouseEvent) {
 
 	dragging = true;
 	//left or right click
-	if (mouseEvent.which == 1) 
+	if (mouseEvent.which == 1)
 		draw(mouseEvent);
-  
-  //if (mouseEvent.target == canvas) 
+
+  //if (mouseEvent.target == canvas)
   mouseEvent.preventDefault();
 	return false;
 }
@@ -389,13 +389,13 @@ window.addEventListener("touchend", mouseup, false);
 function mouseup (mouseEvent) {
 
   dragging = false;
-  
-  if (mouseEvent.target == canvasHolder) 
+
+  if (mouseEvent.target == canvasHolder)
     mouseEvent.preventDefault();
 }
 
 
-//mouse is moving on canvas		
+//mouse is moving on canvas
 canvasHolder.addEventListener("mousemove", draw, false);
 canvasHolder.addEventListener("touchmove", draw, false);
 function draw (mouseEvent) {
@@ -407,7 +407,7 @@ function draw (mouseEvent) {
 		lastPos = cursorLocation;
 	}
 
-	//if (mouseEvent.target == canvas) 
+	//if (mouseEvent.target == canvas)
 	mouseEvent.preventDefault();
 }
 
@@ -415,91 +415,91 @@ function draw (mouseEvent) {
 //clear canvas button
 document.querySelector('#clear-canvas').addEventListener('click', function () {
   if (confirm('Are you sure you want to clear the current layer?'))
-    return selectedCtx.clearRect(0,0,width,height); 
-    
+    return selectedCtx.clearRect(0,0,width,height);
+
     canvases.forEach(function (canvas,i) {
       var context = canvas.getContext('2d');
-      context.clearRect(0,0,width,height);  
+      context.clearRect(0,0,width,height);
     });
 });
 
 
 var output = document.querySelector('#output');
-//generate 
+//generate
 document.querySelector('button.generate').addEventListener('click', function () {
   console.log('generating',variations.value,'variations');
-  
+
   //make sure they aren't trying to generate too many
-  if (variations.value > 64 && !confirm('Woah, that\'s a lot of variations. You sure you want to generate '+variations.value+' sprites? It might make your computer sad.')) 
+  if (variations.value > 64 && !confirm('Woah, that\'s a lot of variations. You sure you want to generate '+variations.value+' sprites? It might make your computer sad.'))
     return;
-  
+
   output.innerHTML = '';
-  
+
   var cp = centerPixel.getValue() ? 1 : 0;
-  
+
   //create a new sprite as many times as the variations value
   for (var v = 0; v < variations.value; v++) {
     console.log('generating variation',v)
 
     var outputCanvas = document.createElement("canvas");
-    
+
     outputCanvas.width = width+2;
     outputCanvas.height = height+2;
     outputCanvas.style.width = ((width+2)*4)+'px';
     outputCanvas.style.height = ((height+2)*4)+'px';
     output.appendChild(outputCanvas);
     outputCanvas.title = "click to download"
-    
+
     var outputContext = outputCanvas.getContext("2d");
-    
-    
+
+
     const outputImageData = new Uint8ClampedArray(width*height*4);
 
     var layerList = canvasHolder.querySelectorAll('canvas');
     console.log('layerlist',layerList.length-1,layerList)
-    
+
     //loop through layers backwards (to draw the bottom one first)
     for (var j = layerList.length-1; j >= 0; j--) {
 
       console.log('getting layer',j, layerList[j])
     //canvasList.forEach(function (c) {
-      
+
       var ctx = layerList[j].getContext('2d');
       var canvas = ctx.getImageData(0,0,width,height);
-      
+
       // Iterate through every pixel
       for (let p = 0; p < outputImageData.length; p += 4) {
-        
+
         //skip rendering for mirrored areas
         if (mirrorGenerationX.getValue() && p/4 % width > width/2 - 1) continue;
         if (mirrorGenerationY.getValue() && Math.floor(p/4 / width) > height/2 - 1) continue;
-        
+
         //set variables
         var thisPixel = [canvas.data[p + 0],canvas.data[p + 1],canvas.data[p + 2]];
         var x = p/4%width;
         var y = Math.floor(p/4 / width);
-        
+
         //mirror horizontally
         var pX = p + ((width/2-x) *2 - 1 - cp)*4;
         var xPixel = [canvas.data[pX + 0],canvas.data[pX + 1],canvas.data[pX + 2]];
-        
+
         //mirror verticaly
         var pY = p + ((height/2-y) *2 - 1 - cp)*width*4;
         var yPixel = [canvas.data[pY + 0],canvas.data[pY + 1],canvas.data[pY + 2]];
-        
+
         //mirror verticaly and horizontally
         var pXY = p + ((width/2-x) *2 - 1 - cp)*4 + ((height/2-y) *2 - 1 - cp)*width*4;
         var xyPixel = [canvas.data[pXY + 0],canvas.data[pXY + 1],canvas.data[pXY + 2]];
 
         //roll the chance that the pixel gets generated
         var chance = roll();
-        
+
         //loop through colors and see if there's a match
         for (var c = 0; c < colors.length; ++c) {
           var col = colors[c];
           //if this pixel matches this color
           var realColor = document.querySelectorAll('.color-selection .color .jscolor')[c].jscolor.rgb;
-          
+
           //if color matches
           if (thisPixel.equals(col)) {
             //if passed chance
@@ -511,18 +511,18 @@ document.querySelector('button.generate').addEventListener('click', function () 
               outputImageData[p + 3] = 255;             // A value
             }
           }
-          
+
           //mirror horizontally
           if (mirrorGenerationX.getValue()) {
-            
+
             //find mirror X pixel
             if (p < 500) console.log('xpixel','x:',x,', flipX:',x+(width/2-x)*2)
-            
+
             //if it's not empty
             if (canvas.data[pX+3] != 0) {
               //if color matches
               if (xPixel.equals(col)) {
-                //if passes chance 
+                //if passes chance
                 if (canvas.data[pX+3] == 255 || chance < canvas.data[pX+3]) {
                   outputImageData[pX + 0] = realColor[0];    // R value
                   outputImageData[pX + 1] = realColor[1];    // G value
@@ -530,9 +530,9 @@ document.querySelector('button.generate').addEventListener('click', function () 
                   outputImageData[pX + 3] = 255;    // A value
                 }
               }
-            } 
+            }
           }
-          
+
           //mirror vertically
           if (mirrorGenerationY.getValue()) {
 
@@ -540,7 +540,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
             if (canvas.data[pY+3] != 0) {
               //if color matches
               if (yPixel.equals(col)) {
-                //if passes chance 
+                //if passes chance
                 if (canvas.data[pY+3] == 255 || chance < canvas.data[pY+3]) {
                   outputImageData[pY + 0] = realColor[0];    // R value
                   outputImageData[pY + 1] = realColor[1];    // G value
@@ -548,9 +548,9 @@ document.querySelector('button.generate').addEventListener('click', function () 
                   outputImageData[pY + 3] = 255;    // A value
                 }
               }
-            } 
+            }
           }
-          
+
           //mirror vertically and horizontally
           if (mirrorGenerationX.getValue() && mirrorGenerationY.getValue()) {
 
@@ -558,7 +558,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
             if (canvas.data[pXY+3] != 0) {
               //if color matches
               if (xyPixel.equals(col)) {
-                //if passes chance 
+                //if passes chance
                 if (canvas.data[pXY+3] == 255 || chance < canvas.data[pXY+3]) {
                   outputImageData[pXY + 0] = realColor[0];    // R value
                   outputImageData[pXY + 1] = realColor[1];    // G value
@@ -568,31 +568,31 @@ document.querySelector('button.generate').addEventListener('click', function () 
               }
             }
           }
-          
+
         }
-    
+
       }
-  
+
       console.log(outputImageData)
-      
+
       //outputContext.clearRect(0,0,width+2,height+2);
-      
+
       // Draw image data to the canvas
-      
 
-  
 
-    } 
-    
+
+
+    }
+
     let outputImage = new ImageData(outputImageData, width);
     outputContext.putImageData(outputImage, 1, 1);
-		
+
   //Mirror Horizontally
   	if (mirrorGenerationX.getValue()) {
 
   	  //erase right half of image
   	  //outputContext.clearRect(width/2+1,0,width/2+1,height+2);
-  	  
+
   	  //draw the image revered
   	  outputContext.save();
         outputContext.translate(width, 0);
@@ -600,13 +600,13 @@ document.querySelector('button.generate').addEventListener('click', function () 
         //outputContext.drawImage(outputContext.canvas, 0, 0, width/2+1, height+2, width/2, 0,-width/2-1, height+2);
 		  outputContext.restore();
 		}
-		
+
 	//remove single pixels
   	if (removeSinglePixels.getValue()) {
   	  //get sprite data
       var outputSprite = outputContext.getImageData(0,0,width+2,height+2);
       var outputData = outputSprite.data;
-      
+
       //loop through pixels
       for (let i = 0; i < outputData.length; i += 4) {
         var o = {
@@ -619,7 +619,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
           dl: i + (width+2)*4 - 4, //down-left
           dr: i + (width+2)*4 + 4, //down-right
         };
-        
+
         //if the surrounding pixels are all transparent
         if (
           outputData[o.l+3] == 0 &&
@@ -633,27 +633,27 @@ document.querySelector('button.generate').addEventListener('click', function () 
           )
             outputData[i+3]=0;
       }
-      
+
   	  //redraw the sprite
       outputContext.clearRect(0,0,width+2,height+2);
       outputContext.putImageData(outputSprite, 0, 0);
 		}
-		
+
 	//DRAW OUTLINE ===============================================================
-	  
+
   	 if (drawOutline.getValue()) {
       var outputData = outputContext.getImageData(0,0,width+2,height+2).data;
       //let outlinedSprite = new ImageData(shapeData, width+2);
       let outlinedSprite = outputData.slice(0);
-      
+
       var outlineColor = document.querySelector('.color-selection .color:nth-child(7) .jscolor').jscolor.rgb;
-      
+
       //loop through pixels
       for (let i = 0; i < outputData.length; i += 4) {
 
         //if this pixel is transparent
         if (outputData[i + 3] == 0) {
-          
+
           //offsets for pixel to the left, right, up, down
           var o = {
             l: i - 4,
@@ -661,7 +661,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
             u: i - (width+2)*4,
             d: i + (width+2)*4,
           };
-          
+
           //rgb array for each pixel
           var p = {
             l: [outputData[o.l], outputData[o.l+1], outputData[o.l+2]],
@@ -669,7 +669,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
             u: [outputData[o.u], outputData[o.u+1], outputData[o.u+2]],
             d: [outputData[o.d], outputData[o.d+1], outputData[o.d+2]],
           };
-          
+
           //if any of the surrounding pixels is not transparent OR the background color
           if (
             (outputData[o.l+3] == 255 && !p.l.equals(outlineColor) ) || //left
@@ -683,10 +683,10 @@ document.querySelector('button.generate').addEventListener('click', function () 
                 outlinedSprite[i + 2] = outlineColor[2];    // B value
                 outlinedSprite[i + 3] = 255;  // A value
           }
-        } 
-    
+        }
+
       }
-    
+
       let outLined = new ImageData(outlinedSprite, width+2);
       outputContext.clearRect(0,0,width+2,height+2);
       outputContext.putImageData(outLined, 0, 0);
@@ -699,7 +699,7 @@ document.querySelector('button.generate').addEventListener('click', function () 
 //download individual sprite
 var downloadHolder = document.querySelector('#download-holder');
 output.addEventListener('click', function (e) {
-  
+
   //if canvas, download the image
   if (e.target.tagName == 'CANVAS') {
     downloadHolder.href = e.target.toDataURL();
@@ -710,21 +710,21 @@ output.addEventListener('click', function (e) {
 //download sprite sheet
 document.querySelector('#download-sprite-sheet').addEventListener('click', function () {
   var sprites = output.querySelectorAll('canvas');
-  
+
   //create image to hold it
   var spritesheet = document.createElement("canvas");
   var spriteSheetCtx = spritesheet.getContext('2d');
   var spritesacross = Math.ceil(Math.sqrt(sprites.length));
   spritesheet.width = spritesacross*(width+2);
   spritesheet.height = sprites.length/spritesacross*(width+2);
-  
+
   console.log(spritesheet);
-  
+
   //loop through all
   sprites.forEach(function (c, i) {
     spriteSheetCtx.drawImage(c, i%spritesacross * (width+2), Math.floor(i/spritesacross) * (width+2) );
-  }); 
-  
+  });
+
   downloadHolder.href = spritesheet.toDataURL();
   downloadHolder.click();
 });
@@ -737,7 +737,7 @@ document.querySelector('#download-sprite-sheet').addEventListener('click', funct
 //128=50%
 //0=false
 function roll () {
-  return Math.random() * 255; 
+  return Math.random() * 255;
 }
 
 //color(Array )
@@ -753,12 +753,12 @@ if(Array.prototype.equals)
     console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
 // attach the .equals method to Array's prototype to call it on any array
 Array.prototype.equals = function (array) {
-    
+
     // if the other array is a falsy value, return
     if (!array)
         return false;
 
-    // compare lengths - can save a lot of time 
+    // compare lengths - can save a lot of time
     if (this.length != array.length)
         return false;
 
@@ -767,13 +767,13 @@ Array.prototype.equals = function (array) {
         if (this[i] instanceof Array && array[i] instanceof Array) {
             // recurse into the nested arrays
             if (!this[i].equals(array[i]))
-                return false;       
-        }           
-        else if (this[i] != array[i]) { 
+                return false;
+        }
+        else if (this[i] != array[i]) {
             // Warning - two different object instances will never be equal: {x:20} != {x:20}
-            return false;   
-        }           
-    }       
+            return false;
+        }
+    }
     return true;
 }
 // Hide method from for-in loops

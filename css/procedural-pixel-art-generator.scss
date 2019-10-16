@@ -11,7 +11,7 @@
     border-radius: 0.5em;
     cursor: pointer;
     padding: 0.5em;
-    
+
     &:hover {
       background: color(button);
     }
@@ -27,27 +27,27 @@ canvas {
   margin: 2em 0 0 0;
   user-select: none;
   align-items: flex-start;
-  
+
   &>div:not(:first-child) {
     margin-left: 2em;
-    
+
     h3:first-child {
       margin-top: 0;
     }
   }
-  
+
   .eraser {
     border: none;
     background: color(button);
-    padding: 0.5rem 0.75rem; 
+    padding: 0.5rem 0.75rem;
     cursor: pointer;
-     
+
     svg {
       width: 1.5rem;
       height: 1.5rem;
     }
   }
-  
+
   &.eraser {
     .canvas-holder {
       cursor: url(/procedural-pixel-art-generator/eraser.png), auto !important;
@@ -71,7 +71,7 @@ canvas {
   #layer-selected {
     display: flex;
     justify-content: space-between;
-    
+
     label {
       padding: 0.5em 1em;
       cursor: pointer;
@@ -82,49 +82,49 @@ canvas {
     }
     input {
       display: none;
-      
+
       &:checked + label{
         color: lighten($base-color, 70%);
         background: color(base, foreground);
       }
     }
-    
+
     //label
-    strong { 
-      align-self: center; 
+    strong {
+      align-self: center;
       margin-right: 0.5em;
     }
-    
+
     //spacer
     &>div {
       flex-grow: 1;
     }
-    
+
     //clear button
     button#clear-canvas {
       background: none;
       border: none;
       cursor: pointer;
       padding: 0.5em 0.75em;
-      
+
       svg {
-        width: 1.75em; 
+        width: 1.75em;
         height: 1.75em;
         path {
           fill: color(indent,foreground,symbol);
         }
       }
-      
+
       &:hover {
         background: color(button);
         svg path {
           fill: color(button,foreground);
         }
       }
-      
+
     }
   }
-  
+
   .canvas-holder {
     cursor: url(/pixel-art-where-to-start/pencil-tool-cursor.png), auto;
     background: white;
@@ -142,12 +142,12 @@ canvas {
     }
     &.onion canvas {background-color: transparent;}
     &:not(.onion) canvas.selected {z-index: 200 !important;}
-    
+
     .gridline {
-  
+
       background: black;
       position: absolute;
-      
+
       &.horizontal {
         width: 1px;
         height: calc(100% - 2em);
@@ -155,7 +155,7 @@ canvas {
         left: 50%;
         border-left: solid 1px white;
       }
-      
+
       &.vertical {
         width: calc(100% - 2em);
         height: 1px;
@@ -177,7 +177,7 @@ canvas {
 
 .chance-selection {
   display: flex;
-  
+
   button {
     height: 3em;
     border: none;
@@ -187,22 +187,22 @@ canvas {
     transition: margin-top 200ms, height 200ms, border-bottom-width 150ms;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     flex: 0 0 25%;
-    
+
     //colors
     &:nth-child(1) {color: white}
     &:nth-child(2) {color: white}
-    
+
     //background colors
     &:nth-child(1) {background-color: color(button)}
     &:nth-child(2) {background-color: lighten(color(button),25%)}
     &:nth-child(3) {background-color: lighten(color(button),50%)}
     &:nth-child(4) {background-color: lighten(color(button),75%)}
-    
-    
+
+
     //curved edges
     &:first-child {border-radius: 2px 0 0 2px;}
     &:last-child {border-radius: 0 2px 2px 0;}
-    
+
     &:active, &.current-selection {
       margin-top: 0.5em;
       height: 2.5em;
@@ -213,7 +213,7 @@ canvas {
 
 .color-selection {
   position: relative;
-  
+
   .selection {
       width: 3em;
       height: 3em;
@@ -224,11 +224,11 @@ canvas {
       z-index: 10;
       transition: all 200ms;
   }
-  
+
   .color {
     display: flex;
     align-items: center;
-    
+
     &:nth-child(1) .palette-color {background-color: #ff0000}
     &:nth-child(2) .palette-color {background-color: #00ff00}
     &:nth-child(3) .palette-color {background-color: #0000ff}
@@ -236,7 +236,7 @@ canvas {
     &:nth-child(5) .palette-color {background-color: #ff00ff}
     &:nth-child(6) .palette-color {background-color: #ffff00}
     &:nth-child(7) .palette-color {background-color: #000000}
-    
+
     .palette-color {
       width: 3rem;
       height: 3rem;
@@ -257,14 +257,14 @@ canvas {
 
 #output {
   margin: 1em 0;
-  
+
   canvas {
     border: solid 1px color(base,background,lighthover);
     border-radius: 0.5em;
     padding: 0.5em;
     margin-right: 0.5em;
     cursor: pointer;
-    
+
     &:hover {
       background: color(base,background,lighthover);
     }
@@ -275,7 +275,7 @@ canvas {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  
+
   &>* {
     margin-right: 2em;
   }
@@ -289,18 +289,18 @@ canvas {
   #pixel-demo {
     flex-direction: column;
   }
-  
+
   #canvas-sidebar {
     flex-direction: row;
     margin-left: 0;
     margin-top: 2em;
   }
-  
+
   #color-palette {
     margin-bottom: 0;
     button {
       flex: 1 1 calc(25% - 1em);
     }
   }
-  
+
 }

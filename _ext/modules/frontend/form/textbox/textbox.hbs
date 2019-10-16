@@ -1,27 +1,34 @@
 
-  
+
 {{#if multiline}}
 <div class="textarea-holder">
   <label for="text-{{fieldslug}}">{{label}}</label>
-  <textarea 
+  <textarea
     id="text-{{fieldslug}}"
     class="textbox autosize"
-    type="text" 
-    name="{{name}}" 
+    type="text"
+    {{#unless nameless}}name="{{fieldslug}}"{{/unless}}
     spellcheck="false"
+    {{#disabled}} disabled{{/disabled}}
     >{{default}}</textarea>
-   
+
 </div>
 {{else}}
 <div class="textbox-holder">
-  <input 
-    id="text-{{fieldslug}}"
-    class="textbox"
-    type="text" 
-    name="{{name}}" 
-    spellcheck="false"
-    value="{{default}}"
-    /> 
-  <label for="text-{{fieldslug}}">{{label}}</label>
+	{{#prelabel}}<label for="text-{{fieldslug}}">{{this}}</label>{{/prelabel}}
+	<input
+		id="text-{{fieldslug}}"
+		class="textbox"
+		type="text"
+		{{#unless nameless}}name="{{fieldslug}}"{{/unless}}
+		spellcheck="false"
+		value="{{default}}"
+		{{#placeholder}} placeholder="{{this}}"{{/placeholder}}
+		{{#maxLength}} maxlength="{{this}}"{{/maxLength}}
+		{{#pattern}} pattern="{{this}}"{{/pattern}}
+		{{#disabled}} disabled title="{{this}}"{{/disabled}}
+		{{#unless disabled}}{{#title}} title="{{this}}"{{/title}}{{/unless}}
+		/>
+	{{#label}}<label for="text-{{fieldslug}}">{{this}}</label>{{/label}}
 </div>
 {{/if}}
